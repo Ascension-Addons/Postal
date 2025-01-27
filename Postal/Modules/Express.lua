@@ -44,11 +44,11 @@ end
 --end
 
 function Postal_Express:InboxFrameItem_OnEnter(this, motion)
-	self.hooks["InboxFrameItem_OnEnter"](this, motion)
 	local tooltip = GameTooltip
-	
+	tooltip:SetOwner(this, "ANCHOR_RIGHT");
 	local money, COD, _, hasItem, _, wasReturned, _, canReply = select(5, GetInboxHeaderInfo(this.index))
 	if Postal.db.profile.Express.MultiItemTooltip and hasItem and hasItem > 1 then
+		tooltip:AddLine("Multiple Items")
 		for i = 1, ATTACHMENTS_MAX_RECEIVE do
 			local name, itemTexture, count, quality, canUse = GetInboxItem(this.index, i);
 			if name then
